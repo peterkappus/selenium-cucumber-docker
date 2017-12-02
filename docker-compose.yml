@@ -1,5 +1,0 @@
-selenium:
- image: selenium/standalone-firefox-debug:2.47.1
- ports:
- - 4444:4444
- - 5900:5900
