@@ -33,4 +33,11 @@ docker run -v "$(PWD)":/app -it ruby bash
 cd /app
 bundle
 ```
-elsewhere...
+In another terminal window:
+`docker run -d -p 4444:4444 -p 5900:5900 selenium/standalone-chrome-debug`
+
+Now in OSX open a browser to http://0.0.0.0:4444/wd/hub
+Click "Create session"
+Select a browser
+Now in OSX go to Finder > Go > Connect to server.
+enter "vnc://0.0.0.0:5900" (password is "secret")
