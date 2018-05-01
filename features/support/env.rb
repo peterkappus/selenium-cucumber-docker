@@ -3,6 +3,11 @@ require 'capybara/cucumber'
 require 'selenium-webdriver'
 require 'pry'
 
+#screenshot capability
+require 'capybara-screenshot'
+require 'capybara-screenshot/cucumber'
+
+
 
 #because it's an internal URL and I'm on reith, we don't need the proxy...
 #ENV['HTTP_PROXY'] = ENV['http_proxy'] = nil
