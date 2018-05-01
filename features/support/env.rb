@@ -10,7 +10,7 @@ require 'pry'
 #get IP of host which has 4444 mapped from other container
 docker_ip = %x(/sbin/ip route|awk '/default/ { print $3 }').strip
 
-Capybara.register_driver :chrome do |app|
+Capybara.register_driver :remote_chrome do |app|
   Capybara::Selenium::Driver.new(app,
   :browser => :remote,
   :desired_capabilities => :chrome,
@@ -20,6 +20,6 @@ end
 
 Capybara.configure do |config|
   config.run_server = false
-  config.default_driver = :chrome
+  config.default_driver = :remote_chrome
   config.app_host = 'http://www.google.com' # change url
 end
