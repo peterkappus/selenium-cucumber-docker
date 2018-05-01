@@ -15,6 +15,9 @@ require 'capybara-screenshot/cucumber'
 #get IP of host which has 4444 mapped from other container
 docker_ip = %x(/sbin/ip route|awk '/default/ { print $3 }').strip
 
+#Hint! Running from inside a Vagrant VM?
+#the host IP will be "10.0.2.2"
+
 Capybara.register_driver :remote_chrome do |app|
   Capybara::Selenium::Driver.new(app,
   :browser => :remote,
