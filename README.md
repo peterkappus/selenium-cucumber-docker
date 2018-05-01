@@ -3,9 +3,7 @@ This repo shows how to setup Ruby/Cucumber/Capybara tests in one docker containe
 
 See `support/env.rb` for the magic.
 
-## Getting Started
-
-### Start ruby/test container
+## Start ruby/test container
 ```
 docker run -v "$(PWD)":/app -it ruby bash
 
@@ -13,23 +11,25 @@ docker run -v "$(PWD)":/app -it ruby bash
 cd /app
 bundle
 ```
-### Start the selenium/browser container
+## Start the selenium/browser container
 In another terminal window: 
 ```
-docker run -d -p 4444:4444 -p 5900:5900 selenium/standalone-chrome-debug```
+docker run -d -p 4444:4444 -p 5900:5900 selenium/standalone-chrome-debug
+```
 
-###  Connect/view the browser via VNC (in OSX)
+##  Connect/view the browser via VNC (in OSX)
 ```
 open vnc://:secret@0.0.0.0:5900
 ```
+
 You can also do this via the Finder: Go > Connect to server (cmd+K)
 
-#### Hint: Go headless
+### Hint: Go headless
 ```
 docker run -d -p 4444:4444 -p 5900:5900 selenium/standalone-chrome
 ```
 
-### Manually starting browser sessions to play with:
+## Manually starting browser sessions to play with:
 You can start a session on the selenium machine manually:
 
 * Browse to http://0.0.0.0:4444/wd/hub
@@ -37,7 +37,7 @@ You can start a session on the selenium machine manually:
 * Select "Chrome"
 * Connect via VNC (see above) `open vnc://:secret@0.0.0.0:5900`
 
-### Run the tests:
+## Run the tests:
 In the ruby container run:
 ```
 cucumber
