@@ -198,9 +198,11 @@ When(/^I click on text "([^"]+?)" within "([^"]+?)"$/) do |text_to_click, css_se
 	find(css_selector, ":text => 'text_to_click'").trigger('click')
 end
 
-When(/^I click on "([^"]*)" button$/) do |button_text|
-  click_button(button_text)
+When(/^I click on (?:the )?"([^"]*)" button$/) do |button_text|
+  #click the first one...
+  first(:button,button_text,{visible:true}).click
 end
+
 
 Then(/^I click on random "(.*?)" link$/) do |selector|
 	all(selector).to_a.reject{|node| node.text.empty?}.shuffle.first.click

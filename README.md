@@ -4,38 +4,48 @@ This repo explains how to setup Ruby/Cucumber/Capybara tests in one docker conta
 See `support/env.rb` for the magic.
 
 ## Getting started
-
-### Start the Ruby/test container
-This container holds and runs the tests. From a terminal in the host run:
+We're going to start two containers: one which holds chrome and the selenium hub and a second which holds ruby and runs our tests:
+### Basic steps
 ```
+# start the selenium chrome container in the background:
+docker run -d -p 4444:4444 -p 5900:5900 selenium/standalone-chrome-debug
+
+# wait while it starts up so we can connect...
+sleep 3
+
+# need to see the browser? Connect via VNC (password is 'secret')
+# You can also do this via the Finder: Go > Connect to server (cmd+k)
+open vnc://:secret@0.0.0.0:5900
+
+# start a ruby container
 docker run -v "$(PWD)":/app -it ruby bash
 
-# From inside the container:
+# Once inside the ruby container, install the gems:
 cd /app
 bundle
-```
-### Start the selenium/browser container
-In another terminal window run: 
-```
-docker run -d -p 4444:4444 -p 5900:5900 selenium/standalone-chrome-debug
-```
 
-### Run the tests
-In the Ruby container run:
-```
+# run the tests
 cucumber
 ```
 
-###  Connect via VNC (in OSX)
-Need to see the browser in action? Connect via VNC to see it (password is '_secret_'):
-```
-open vnc://:secret@0.0.0.0:5900
-```
-
-You can also do this via the Finder: Go > Connect to server (cmd+k)
-
 ## Advanced usage
 
+### Save the state of your ruby container
+Remember, you can commit the state of a running container and then restore it later so you don't have to reinstall the gems, etc:
+```
+# find the id of the container and copy it
+docker ps
+
+# commit it 
+# for example: docker commit -m "ruby test container first commit" fed03851345a ruby_test:1
+```
+Run `docker commit -h` for more info on committing.
+
+The next time you need to start the ruby container, just run
+```
+docker run -v "$(PWD)":/app -it ruby_test:1 bash
+cd /app
+```
 ### Go headless
 If you don't need to see the browser, you can use a smaller/faster headless Selenium container:
 ```
