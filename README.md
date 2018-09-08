@@ -29,21 +29,6 @@ cucumber
 
 ## Advanced usage
 
-### Save the state of your ruby container
-Remember, you can commit the state of a running container and then restore it later so you don't have to reinstall the gems, etc:
-```
-# Without stopping the running container, open a new terminal,  find the id of the container, and copy it
-docker ps
-
-# commit it 
-docker commit -m "ruby test container first commit" $(docker ps | grep ruby | grep -o "^\w\+") ruby_test:1
-
-#Hint: Run `docker commit -h` for more info on committing.
-
-#The next time you need to start the ruby container, just run
-docker run -v "$(PWD)":/app -it ruby_test:1 bash
-cd /app
-```
 ### Go headless
 If you don't need to see the browser, you can use a smaller/faster headless Selenium container:
 ```
