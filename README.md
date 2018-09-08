@@ -43,6 +43,8 @@ You can manually start a browser session in the Selenium container:
 * Select "Chrome"
 * Connect via VNC (see above) `open vnc://:secret@0.0.0.0:5900`
 
-
 ## Cleaning up
-Don't forget to kill off the browser container when you're finished. use `docker ps` to get the hash/id and then use `docker kill <ID>` to stop it.
+Don't forget to kill off the browser container when you're finished with something like this:
+```
+docker kill $(docker ps | grep selenium/standalone-chrome | grep -o "^\w\+")
+```
