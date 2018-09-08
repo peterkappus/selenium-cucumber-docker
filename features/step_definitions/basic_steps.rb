@@ -1,21 +1,11 @@
+#This file contains some useful steps for interacting with specific page elements, moving forwards and backwards in time, etc. They're pretty low-level so you might use them to get started but eventually you'll want to write your own application-specific steps.
 
+#things to do before each scenario
 Before do |scenario|
-	  #basic auth
-	  #obsolete since we now turn off basic auth in test env
-	  #page.driver.browser.authorize 'x', 'x'
-		#RSpec.configure do |config|
-	  #config.before do
-	  #  Capybara.current_driver = :selenium
-	  #  Capybara.javascript_driver = :selenium
-	  #  Capybara.run_server = true
-	  #  Capybara.server_port = 7000
-	  #  Capybara.app_host = "http://localhost:#{Capybara.server_port}"
-	  #end
-	#end
 end
 
+#and after....
 After do |scenario|
-	# pry.binding
 end
 
 #travel back to the correct time after runniung a @time_travel tagged step
@@ -23,13 +13,14 @@ After('@time_travel') do
   travel_back
 end
 
+#time-travel to the given date
 Given(/^the current date is (.+)$/) do |time_string|
   travel_to(Time.parse(time_string))
 end
 
+#see some text within a css selector
 Then(/^I should see "([^"]*)" within "([^"]*)" (\d+) time(?:s)?$/) do |text, selector, count|  #debug
   all(selector,text: /\A#{text}\z/).count.to_i.should equal? count.to_i
-  #find.all(:text=>)
 end
 
 
@@ -38,6 +29,7 @@ Then(/^I should see "([^"]*)" before "([^"]*)"$/) do |first_thing, second_thing|
   body.index(first_thing).should be < body.index(second_thing)
 end
 
+#fill in a field
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field_name, content|
   fill_in field_name, :with=>content
 end
@@ -93,8 +85,6 @@ def check_node_for_link(link)
 end
 
 
-
-
 #STEPS DOWN HERE....
 
 #give us a step definition for "debug"
@@ -119,14 +109,6 @@ end
 
 #click on button or link
 When(/^I click (?:on )?"([^"]+?)"$/) do |text|
-	#click_on text
-	#click_on link_to_click
-	#for some reason the regular click_on didn't find AngularJS generated links.
-	#the custom "find_first_link" method works...
-	#node = first("a",text:text)
-  #node = first("label",text: text,visible:true) unless node.present?
-  #click_button text unless node.present?
-	#node.click if node.present?
   click_on text
 end
 
@@ -243,12 +225,10 @@ Then(/^I should see (\d+) or more "([^"]+?)" elements, within "([^"]+?)"$/) do |
 end
 
 Then(/^I should see the selector "(.+?)"$/) do |css_selector|
-	#page.save_screenshot("#{text_to_see}.png")
 	page.should have_css(css_selector)
 end
 
 Then(/^I should see the css selector "(.+?)" for "([^"]+?)"$/) do |css_selector, dummy_text|
-	#page.save_screenshot("#{text_to_see}.png")
 	page.should have_css(css_selector)
 end
 
