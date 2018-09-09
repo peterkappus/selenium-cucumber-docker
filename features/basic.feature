@@ -1,5 +1,12 @@
 Feature: Search for things on Google and see results.
 
-Scenario: See "Dog" when I search for "puppies"
-  When I search for "puppies"
-  Then I should see "Dog"
+Scenario Outline: See related words when searching.
+  When I search for "<primary_term>"
+  Then I should see "<secondary_term>"
+  
+  Examples:
+  | primary_term | secondary_term |
+  | Puppies  |   Dog  |
+  | Kittens  |  Cat   | 
+  |  Guppies |  Fish  |  
+  |  Calf | bovine  |  
