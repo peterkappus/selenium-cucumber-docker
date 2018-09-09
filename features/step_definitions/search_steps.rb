@@ -1,5 +1,5 @@
-When("I search for {string}") do |search_string|
+When("I search for {string}") do |string|
   visit "/"
-  fill_in "lst-ib", with: search_string
+  fill_in "lst-ib", with: string
   click_on "Google Search", match: :first
 end
