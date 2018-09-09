@@ -13,7 +13,7 @@ docker run -d -p 4444:4444 -p 5900:5900 selenium/standalone-chrome-debug
 # wait while it starts up so we can connect...
 sleep 5
 
-# need to see the browser? Connect via VNC (password is 'secret')
+# need to see the browser? Connect via [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing) (password is 'secret')
 # You can also do this via the Finder: Go > Connect to server (cmd+k)
 open vnc://:secret@0.0.0.0:5900
 
