@@ -29,6 +29,9 @@ cucumber
 
 ## Advanced usage
 
+### Using the 'pry' debugger.
+You can add a step `And I debug` to your features to open the [pry](https://github.com/pry/pry) interactive debugger which lets you write code to interact with the browser in real-time without restarting your tests.
+
 ### Go headless
 If you don't need to see the browser, you can use a smaller/faster headless Selenium container:
 ```
