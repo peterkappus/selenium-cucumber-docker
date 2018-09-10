@@ -32,6 +32,9 @@ cucumber
 ### Using the 'pry' debugger.
 You can add a step `And I debug` to your features to open the [pry](https://github.com/pry/pry) interactive debugger which lets you write code to interact with the browser in real-time without restarting your tests.
 
+## Use Scenario Outlines
+You can use "[scenario outlines](https://docs.cucumber.io/gherkin/reference/)" to quickly run through the same scenario with different variables.
+
 ### Go headless
 If you don't need to see the browser, you can use a smaller/faster headless Selenium container:
 ```
