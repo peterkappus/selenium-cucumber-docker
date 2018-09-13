@@ -20,11 +20,9 @@ open vnc://:secret@0.0.0.0:5900
 #build a container with the gems specified in our Gemfile and Gemfile.lock
 docker build . -t ruby_test
 
-# start it up with a bash shell:
-docker run -v "$(PWD)":/app -it ruby_test bash
+# start it up and run cucumber
+docker run -v "$(PWD)":/app -it ruby_test
 
-# Once inside the ruby container, run the tests:
-cucumber
 ```
 
 ## Advanced usage
