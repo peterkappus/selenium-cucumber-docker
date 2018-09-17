@@ -27,6 +27,12 @@ docker run -v "$(PWD)":/app -it ruby_test
 
 ## Advanced usage
 
+### Use Docker compose!
+
+```
+docker-compose up
+```
+
 ### Using the 'pry' debugger.
 You can add a step `And I debug` to your features to open the [pry](https://github.com/pry/pry) interactive debugger which lets you write code to interact with the browser in real-time without restarting your tests.
 

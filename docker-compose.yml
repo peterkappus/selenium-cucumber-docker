@@ -1,0 +1,13 @@
+version: '3'
+services:
+  browser:
+    image: selenium/standalone-chrome-debug
+    ports:
+      - "5900:5900"
+      - "4444:4444"
+  ruby:
+    build: .
+    volumes:
+      - .:/app
+    depends_on: 
+      - browser
