@@ -5,9 +5,35 @@ See `support/env.rb` for the magic.
 
 ## Getting started
 We're going to start two containers: one which holds chrome and the selenium hub and a second which holds ruby and runs our tests:
+
 ### Basic steps
 ```
-# start the selenium chrome container in the background:
+docker-compose run ruby bash
+
+# In another terminal connect via VNC to view the browser container:
+open vnc://:secret@0.0.0.0:5900
+
+#now run the tests in the first container:
+cucumber
+
+#all done? Stop the selenium container.
+docker kill $(docker ps | grep selenium/standalone-chrome | grep -o "^\w\+")
+
+```
+
+### Look at the container with VNC:
+```
+```
+
+##TROUBLESHOOTING
+
+### Getting an error that port 5900 is already allocated.
+You may have "Screen sharing" enabled on your mac.
+Go to "Settings" > "Sharing" and *untick* the "Screen Sharing box"
+
+```
+
+start the selenium chrome container in the background:
 docker run -d -p 4444:4444 -p 5900:5900 selenium/standalone-chrome-debug
 
 # wait while it starts up so we can connect...
