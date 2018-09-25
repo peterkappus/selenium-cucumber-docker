@@ -8,9 +8,11 @@ We're going to start two containers: one which holds chrome and the selenium hub
 
 ### Basic steps
 ```
+#start the two containers, but specifically run bash inside the ruby container
+
 docker-compose run ruby bash
 
-# In another terminal connect via VNC to view the browser container:
+# Open another terminal session connect via VNC to view the browser container:
 open vnc://:secret@0.0.0.0:5900
 
 #now run the tests in the first container:
