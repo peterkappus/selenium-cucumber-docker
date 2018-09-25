@@ -17,7 +17,7 @@ open vnc://:secret@0.0.0.0:5900
 cucumber
 
 #all done? Stop the selenium container.
-docker kill $(docker ps | grep selenium/standalone-chrome | grep -o "^\w\+")
+docker-compose down
 
 ```
 
