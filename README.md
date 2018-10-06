@@ -11,6 +11,7 @@ We're going to start two containers: one which holds chrome and the selenium hub
 #start the two containers, but specifically run bash inside the ruby container
 
 docker-compose run ruby bash
+# Note: This could take a few min the first time you run...
 
 # Open another terminal session connect via VNC to view the browser container:
 open vnc://:secret@0.0.0.0:5900
@@ -27,7 +28,7 @@ docker-compose down
 ```
 ```
 
-##TROUBLESHOOTING
+## TROUBLESHOOTING
 
 ### Getting an error that port 5900 is already allocated.
 You may have "Screen sharing" enabled on your mac.
