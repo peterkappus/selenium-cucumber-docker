@@ -1,6 +1,10 @@
 version: '3'
 services:
   browser:
+    # headless version
+    #image: selenium/standalone-chrome
+    
+    # the debug version lets you see/interact via VNC
     image: selenium/standalone-chrome-debug
     ports:
       - "5900:5900"
