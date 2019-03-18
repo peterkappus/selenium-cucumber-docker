@@ -1,14 +1,16 @@
 version: '3'
 services:
   browser:
-    # headless version
-    #image: selenium/standalone-chrome
-    
-    # the debug version lets you see/interact via VNC
+    # See inside via VNC with the "debug" version
     image: selenium/standalone-chrome-debug
+    
+    # Slightly faster headless version
+    #image: selenium/standalone-chrome    
+    
     ports:
-      - "5900:5900"
-      - "4444:4444"
+      - "5900:5900" #for VNC access
+      - "4444:4444" #for webdriver access
+
   ruby:
     build: .
     volumes:
