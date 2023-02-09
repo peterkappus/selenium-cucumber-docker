@@ -1,6 +1,10 @@
 Given('I accept cookies') do
   visit "/"
-  click_on "Accept all"
+
+  #only accept cookies if we're being asked
+  if body.match("Accept all") then
+    click_on "Accept all"
+  end
 end
 
 When("I search for {string}") do |string|
