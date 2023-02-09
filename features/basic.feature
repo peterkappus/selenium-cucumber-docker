@@ -1,5 +1,8 @@
 Feature: Search for things on Google and see results.
 
+Background:
+  Given I accept cookies
+
 Scenario: See related words when searching.
   When I search for "puppies"
   Then I should see "dog"

@@ -1,23 +1,25 @@
 require 'rspec' #for page.shoud etc
 require 'capybara/cucumber'
-require 'selenium-webdriver'
+require 'cucumber'
 require 'pry'
 
-#if you're accessing an internal app behind a firewall, you may not need the proxy. You can unset it like so:
-#ENV['HTTP_PROXY'] = ENV['http_proxy'] = nil
+require "selenium-webdriver"
 
-#get IP of host which has 4444 mapped from other container
-docker_ip = %x(/sbin/ip route|awk '/default/ { print $3 }').strip
+# Ask capybara to register a driver called 'selenium'
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(
+      app,
 
-Capybara.register_driver :remote_chrome do |app|
-  Capybara::Selenium::Driver.new(app,
-  :browser => :remote,
-  :desired_capabilities => :chrome,
-  :url => "http://#{docker_ip}:4444/wd/hub")
+      #what browser do we want? Must match whatever is in our seleniarm stand-alone image
+      browser: :firefox, 
+      
+      #where does it live? By passing a URL we tell capybara to use a selenium grid instance (not local)
+      url: "http://#{ENV['SELENIUM_HOST']}:#{ENV['SELENIUM_PORT']}" 
+  )
 end
 
-Capybara.configure do |config|
-  config.run_server = false
-  config.default_driver = :remote_chrome
-  config.app_host = 'http://www.google.com' # change this to point to your application
-end
+# make the driver we just registered our default driver
+Capybara.default_driver = :selenium
+
+# set the default URL for our tests
+Capybara.app_host = "https://www.google.com/"

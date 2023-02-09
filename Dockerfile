@@ -1,6 +1,9 @@
 #start with the base ruby image
 FROM ruby
 
+#always a good idea to update and have an editor
+RUN apt-get update; apt-get install -y vim
+
 #make sure we have a folder called /app
 RUN mkdir /app
 
